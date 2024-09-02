@@ -1,5 +1,7 @@
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { Module } from '@nestjs/common'
+import { ApolloDriver } from '@nestjs/apollo'
+import { GraphQLModule } from '@nestjs/graphql'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { UserModule } from './modules/user/user.module'
@@ -21,6 +23,10 @@ import { UserModule } from './modules/user/user.module'
             synchronize: true,
             // 数据库中没有该表时，自动创建数据库表
             autoLoadEntities: true,
+        }),
+        GraphQLModule.forRoot({
+            driver: ApolloDriver,
+            autoSchemaFile: true,
         }),
         UserModule,
     ],
