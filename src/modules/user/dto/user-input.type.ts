@@ -9,6 +9,4 @@ export class UserInput {
     name?: string
     @Field({ description: '简介' })
     desc: string
-    @Field({ description: '头像' })
-    avatar: string
 }
