@@ -5,6 +5,7 @@ import { GraphQLModule } from '@nestjs/graphql'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { UserModule } from './modules/user/user.module'
+import { OSSModule } from './modules/oss/oss.module'
 
 @Module({
     imports: [
@@ -29,6 +30,7 @@ import { UserModule } from './modules/user/user.module'
             autoSchemaFile: './schema.gql',
         }),
         UserModule,
+        OSSModule,
     ],
     controllers: [AppController],
     providers: [AppService],
