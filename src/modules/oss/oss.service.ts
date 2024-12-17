@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common'
 import * as OSS from 'ali-oss'
 import * as dayjs from 'dayjs'
 import { OSSType } from './dto/oss.type'
-import { ACCESS_KEY, ACCESS_KEY_SECRET } from 'src/common/constants/aliyun'
+import { ACCESS_KEY, ACCESS_KEY_SECRET } from '@/common/constants/aliyun'
 
 // 用于处理用户相关的业务逻辑
 @Injectable()
@@ -17,7 +17,7 @@ export class OSSService {
         const config = {
             accessKeyId: ACCESS_KEY,
             accessKeySecret: ACCESS_KEY_SECRET,
-            bucket: 'water-drop-assets',
+            bucket: 'water-drop-server-assets',
             dir: 'images/',
         }
 
@@ -32,6 +32,11 @@ export class OSSService {
             ],
         }
 
+        // bucket域名
+        // const host = 'water-drop-server-assets.oss-cn-hangzhou.aliyuncs.com'
+        const host =
+            `https://${config.bucket}.${(await client.getBucketLocation()).location}.aliyuncs.com`.toString()
+
         //签名
         const formData = await client.calculatePostSignature(policy)
 
@@ -41,6 +46,8 @@ export class OSSService {
             policy: formData.policy,
             signature: formData.Signature,
             accessId: formData.OSSAccessKeyId,
+            host,
+            dir: 'images/',
         }
         return params
     }

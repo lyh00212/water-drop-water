@@ -21,7 +21,7 @@ export class User {
 
     @Column({
         comment: '描述',
-        nullable: true,
+        default: '',
     })
     desc: string
 
@@ -32,14 +32,20 @@ export class User {
     tel: string
 
     @Column({
-        comment: '密码',
+        comment: '头像',
         nullable: true,
     })
-    password: string
+    avatar: string
 
     @Column({
-        comment: '账户信息',
+        comment: '验证码',
         nullable: true,
     })
-    account: string
+    code: string
+
+    @Column({
+        comment: '验证码生成时间',
+        nullable: true,
+    })
+    codeCreateTimeAt: Date
 }
