@@ -2,13 +2,13 @@ import { ClassType } from 'type-graphql'
 import { ObjectType, Int, Field } from '@nestjs/graphql'
 import { Page } from './page.type'
 
-interface IResult<T> {
+export interface IResult<T> {
     code: number
     message: string
     data?: T
 }
 
-interface IResults<T> {
+export interface IResults<T> {
     code: number
     message: string
     data?: T[]
@@ -19,7 +19,7 @@ export function createResult<T extends object>(
     ItemType: ClassType<T>,
 ): ClassType<IResult<T>> {
     @ObjectType()
-    class Result {
+    class Result implements IResult<T> {
         @Field(() => Int)
         code: number
         @Field(() => String)
@@ -34,7 +34,7 @@ export function createResults<T extends object>(
     ItemTypes: ClassType<T>,
 ): ClassType<IResults<T>> {
     @ObjectType()
-    class Results {
+    class Results implements IResults<T> {
         @Field(() => Int)
         code: number
         @Field(() => String)
