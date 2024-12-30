@@ -7,6 +7,8 @@ import { AppService } from './app.service'
 import { UserModule } from './modules/user/user.module'
 import { OSSModule } from './modules/oss/oss.module'
 import { AuthModule } from './modules/auth/auth.module'
+import { OrganizationModule } from './modules/organization/organization.module'
+import { StudentModule } from './modules/student/student.module'
 
 @Module({
     imports: [
@@ -33,6 +35,8 @@ import { AuthModule } from './modules/auth/auth.module'
         UserModule,
         OSSModule,
         AuthModule,
+        StudentModule,
+        OrganizationModule,
     ],
     controllers: [AppController],
     providers: [AppService],
